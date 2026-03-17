@@ -3,8 +3,7 @@ const app = express();
 
 app.use(express.json());
 
-const FIREBASE_URL = "https://vending-machine-3a10d-default-rtdb.firebaseio.com";
-
+const FIREBASE_URL = "https://vending-machine-3a10d-default-rtdb.asia-southeast1.firebasedatabase.app";
 app.post("/webhook", async (req, res) => {
 
     const event = req.body;
@@ -12,7 +11,7 @@ app.post("/webhook", async (req, res) => {
     if(event.event === "payment.captured"){
 
         await fetch(`${FIREBASE_URL}/machine/MACHINE_01.json`, {
-            method: "PATCH",
+            method: "PUT" ,
             headers: { "Content-Type": "application/json" },
             body: JSON.stringify({ status: "PAID" })
         });
